@@ -51,7 +51,7 @@ def test_policy(env, policy, n_rollouts):
     succ_rate = 0.0
     for i in range(n_rollouts):
         sarss = get_rollout(env, policy, False)
-        tmp_rew = env.cum_reward(np.array([state for state, _, _, _ in sarss]))
+        tmp_rew = env.cum_reward(np.array([state for state, _, _, _ in sarss], dtype="object"))
         cum_reward += tmp_rew
         if tmp_rew > 0:
             succ_rate += 1.0

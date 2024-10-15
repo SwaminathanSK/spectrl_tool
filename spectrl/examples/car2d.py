@@ -143,4 +143,4 @@ if __name__ == '__main__':
         _, succ_rate = test_policy(env, policy, 100)
         print('Estimated Satisfaction Rate: {}%'.format(succ_rate))
         rollout = get_rollout(env, policy, False)
-        np.save(folder + '/rollout{}{}'.format(i, itno), rollout)
+        np.save(folder + '/rollout{}{}'.format(i, itno), np.array(rollout, dtype = "object"))

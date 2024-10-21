@@ -32,6 +32,7 @@ class ProductMDP:
         return self.state
 
     def step(self, action):
+        # print(action)
         next_state, rew, done, render = self.system.step(action[:self.spec.action_dim])
         res_reg_state, monitor_state = self.spec.extra_step(self.state, action)
         self.state = (np.append(next_state, res_reg_state), monitor_state)

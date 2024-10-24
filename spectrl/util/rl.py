@@ -149,7 +149,7 @@ def test_policy(env, policy, n_rollouts, gamma=1, use_cum_reward=False,
         num_steps += len(sarss)
         if use_cum_reward:
             tmp_reward = env.cum_reward(
-                np.array([state for state, _, _, _ in sarss] + [sarss[-1][-1]]))
+                np.array([state for state, _, _, _ in sarss] + [sarss[-1][-1]], dtype="object"))
         else:
             tmp_reward = discounted_reward(sarss, gamma)
         cum_reward += tmp_reward

@@ -255,9 +255,9 @@ def ars(env, nn_policy, params):
 
             # iv) Estimate cumulative rewards
             r_plus = env.cum_reward(
-                np.array([state for state, _, _, _ in sarss_plus]))
+                np.array([state for state, _, _, _ in sarss_plus], dtype="object"))
             r_minus = env.cum_reward(
-                np.array([state for state, _, _, _ in sarss_minus]))
+                np.array([state for state, _, _, _ in sarss_minus], dtype="object"))
 
             # v) Save delta
             deltas.append((delta, r_plus, r_minus))

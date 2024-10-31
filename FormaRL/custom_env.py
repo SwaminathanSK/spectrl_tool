@@ -6,9 +6,9 @@ WORLD_SIZE = 9
 discount = 0.9
 
 # start = [9, 1]
-start = [9, 1]
+start = [1, 9]
 # goals = [[1, 9], [1, 1], [7, 8]]
-goals = [[1, 1]]
+goals = [[3, 4]]
 
 # leftgap = [5, 3] # left gap
 # rightgap = [6, 7] # right gap

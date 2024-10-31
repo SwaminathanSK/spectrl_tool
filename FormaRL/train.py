@@ -20,7 +20,7 @@ def train():
     print("============================================================================================")
 
     ####### initialize environment hyperparameters ######
-    env_name = "goal-1"
+    env_name = "goal-1-9-to-3-4"
 
     has_continuous_action_space = False  # continuous action space; else discrete
 
@@ -93,7 +93,7 @@ def train():
     #####################################################
 
     ################### checkpointing ###################
-    run_num_pretrained = 0      #### change this to prevent overwriting weights in same env_name folder
+    run_num_pretrained = 1      #### change this to prevent overwriting weights in same env_name folder
 
     directory = "PPO_preTrained"
     if not os.path.exists(directory):
@@ -151,7 +151,7 @@ def train():
 
     # initialize a PPO agent
     ppo_agent = PPO(state_dim, action_dim, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
-
+    ppo_agent.load("/home/swaminathan/git/spectrl_tool/PPO_preTrained/goal-2/PPO_goal-2_0_0.pth")
     # track total training time
     start_time = datetime.now().replace(microsecond=0)
     print("Started training at (GMT) : ", start_time)

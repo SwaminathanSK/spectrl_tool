@@ -19,7 +19,7 @@ from PPO import PPO
 
 start = [9, 1]
 # start = [1, 1]
-goals = [[1, 1], [1, 9]]
+goals = [[1, 1], [3, 4], [1, 9]]
 # goals = [[1, 9]]
 
 ################################### Training ###################################
@@ -98,16 +98,24 @@ def test():
 
         # select action with policy
         action = ppo_agent.select_action(state)
-        state, reward, done, _ = env.step(action)
+        if predicate_num == 2:
+            # Reverse the actions
+            if action == 0 or action == 1:
+                action = action + 2
+            else:
+                action = action - 2
+            state, reward, done, _ = env.step(action)
+        else:
+            state, reward, done, _ = env.step(action)
 
         rewards = ppo_agent.buffer.rewards
         # saving reward and is_terminals
         ppo_agent.buffer.rewards.append(reward)
         ppo_agent.buffer.is_terminals.append(done)
 
-        print(state)
+        # print(state)
         if state == goals[0] and predicate_num == 0:
-            print("reached here")
+            print("Reached [1, 1] from [9, 1]")
             predicate_num = 1
 
             done = False
@@ -115,11 +123,22 @@ def test():
             rewards = ppo_agent.buffer.rewards
             dones = ppo_agent.buffer.is_terminals
 
-            ppo_agent.load("/home/swaminathan/git/spectrl_tool/PPO_preTrained/goal-2/PPO_goal-2_0_0.pth")
-            
+            ppo_agent.load("/home/swaminathan/git/spectrl_tool/PPO_preTrained/goal-3-4/PPO_goal-3-4_0_0.pth")
+        
         elif state == goals[1] and predicate_num == 1:
+            print("Reached [3, 4] from [1, 1]")
+            predicate_num = 2
 
-            print("Policy 1 and 2 succesfully composed..")
+            done = False
+
+            rewards = ppo_agent.buffer.rewards
+            dones = ppo_agent.buffer.is_terminals
+
+            ppo_agent.load("/home/swaminathan/git/spectrl_tool/PPO_preTrained/goal-1-9-to-3-4/PPO_goal-1-9-to-3-4_0_1.pth")
+            
+        elif np.sum(np.array(state) - np.array(goals[2])) < 1 and predicate_num == 2:
+            
+            print("Reached [1, 9] from [3, 4]. (Reversed policy). Succesfully composed..")
             done = True
 
         time_step +=1

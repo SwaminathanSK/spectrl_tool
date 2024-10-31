@@ -1,3 +1,5 @@
+# PPO Implementation from https://github.com/geekyutao/PyTorch-PPO
+
 import torch
 import torch.nn as nn
 from torch.distributions import MultivariateNormal

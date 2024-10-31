@@ -1,4 +1,4 @@
-# PPO Implementation from https://github.com/geekyutao/PyTorch-PPO
+# PPO Implementation from https://github.com/nikhilbarhate99/PPO-PyTorch
 
 import torch
 import torch.nn as nn
